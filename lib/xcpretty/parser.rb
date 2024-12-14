@@ -62,11 +62,6 @@ module XCPretty
     # $2 file_path
     COMPILE_COMMAND_MATCHER = /^\s*(.*clang\s.*\s\-c\s(.*\.(?:m|mm|c|cc|cpp|cxx))\s.*\.o)$/
 
-     # @regex Captured groups
-    # $1 file_path
-    # $2 file_name (e.g. KWCore-Prefix.pch.dia)
-    COMPILE_PCH_MATCHER = /^\s*(.*clang\s.*\.pch\.dia)$/
-
     # @regex Captured groups
     # $1 file_path
     # $2 file_name (e.g. MainMenu.xib)
@@ -349,8 +344,6 @@ module XCPretty
         formatter.format_error($1)
       when COMPILE_MATCHER
         formatter.format_compile($2, $1)
-      when COMPILE_PCH_MATCHER
-        formatter.format_other(text)
       when COMPILE_COMMAND_MATCHER
         formatter.format_compile_command($1, $2)
       when COMPILE_XIB_MATCHER

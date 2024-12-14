@@ -35,8 +35,17 @@ module XCPretty
       directory = '/' if directory.empty?
 
       cmd = compiler_command
-      cmd = cmd.gsub(/(\-include)\s.*\.pch/, "\\1 #{@pch_path}") if @pch_path
+      # cmd = cmd.gsub(/(\-include)\s.*\.pch/, "\\1 #{@pch_path}") if @pch_path
 
+      if @pch_path 
+        match_data = cmd.match(/(\-include)\s.*\.pch/)
+        if match_data
+            replacement_substring = match_data[1]+" "+@pch_path
+            parts = cmd.split(match_data[0])
+            cmd = "#{parts[0]} #{replacement_substring} #{parts[1]}"
+        end
+      end 
+      cmd = cmd.gsub("\\\\", "\\")
       @compilation_units << {command: cmd,
                              file: @current_path,
                              directory: directory}
