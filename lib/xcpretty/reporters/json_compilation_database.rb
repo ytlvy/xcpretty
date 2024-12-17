@@ -40,12 +40,14 @@ module XCPretty
       #MRC compatible
       mrc_str = "-fno-objc-arc"
       is_cmd_mrc = cmd.include?(mrc_str)
-      is_pch_mrc = @pch_path.include?(mrc_str)
-      if !is_cmd_mrc && is_pch_mrc
-        @pch_path = @pch_path.gsub(mrc_str, '')
-      end
+      
         
       if @pch_path 
+        is_pch_mrc = @pch_path.include?(mrc_str)
+        if !is_cmd_mrc && is_pch_mrc
+          @pch_path = @pch_path.gsub(mrc_str, '')
+        end
+
         match_data = cmd.match(/(\-include)\s.*\.pch/)
         if match_data
             replacement_substring = match_data[1]+" "+@pch_path

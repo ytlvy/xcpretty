@@ -157,7 +157,7 @@ module XCPretty
 
     # @regex Captured groups
     # $1 file_path
-    PROCESS_PCH_COMMAND_MATCHER = /^\s*.*\/usr\/bin\/clang\s.*\s\-c\s(.*)\s\-o\s.*/
+    PROCESS_PCH_COMMAND_MATCHER = /^\s*.*\/usr\/bin\/clang\s.*\s\-c\s(.*)\s\-o\s.*Prefix.pch\.dia$/
 
     # @regex Captured groups
     # $1 = file
