@@ -30,7 +30,7 @@ module XCPretty
     end
 
     def format_compile_command(compiler_command, file_path)
-      file_path = file_path.gsub('\<', "<").gsub('\>', ">").gsub('\&', "&").gsub('\(', "(").gsub('\)', ")")
+      file_path = file_path.gsub('\<', "<").gsub('\>', ">").gsub('\&', "&").gsub('\(', "(").gsub('\)', ")").gsub('\|', "|")
       directory = file_path.gsub("#{@current_path}", '').gsub(/\/$/, '')
       directory = '/' if directory.empty?
 
