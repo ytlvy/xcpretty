@@ -37,6 +37,14 @@ module XCPretty
       cmd = compiler_command
       # cmd = cmd.gsub(/(\-include)\s.*\.pch/, "\\1 #{@pch_path}") if @pch_path
 
+      #MRC compatible
+      mrc_str = "-fno-objc-arc"
+      is_cmd_mrc = cmd.include?(mrc_str)
+      is_pch_mrc = @pch_path.include?(mrc_str)
+      if !is_cmd_mrc && is_pch_mrc
+        @pch_path = @pch_path.gsub(mrc_str, '')
+      end
+        
       if @pch_path 
         match_data = cmd.match(/(\-include)\s.*\.pch/)
         if match_data
